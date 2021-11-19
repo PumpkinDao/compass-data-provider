@@ -1,0 +1,12 @@
+# package directories
+node_modules
+jspm_packages
+
+.idea
+.DS_Store
+build
+dist
+package
+yarn-error.log
+.eslintcache
+pumpkindao-compass-data-provider-*.tgz
