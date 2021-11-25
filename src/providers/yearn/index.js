@@ -14,5 +14,6 @@ const run = async () => {
 
 module.exports = {
   version: 1,
+  chain: 'eth',
   run,
 };
