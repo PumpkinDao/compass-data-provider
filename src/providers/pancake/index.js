@@ -175,5 +175,6 @@ const run = async () => {
 
 module.exports = {
   version: 1,
+  chain: 'bsc',
   run,
 };
