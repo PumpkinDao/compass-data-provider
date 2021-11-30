@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
 const URL = 'https://cache-api-mainnet.aave.com/graphql';
+const MARKET_URL = 'https://aave-api-v2.aave.com/data/markets-data';
 
 const BODY = {
   operationName: 'C_ProtocolData',
@@ -18,19 +19,37 @@ const HEADERS = {
 };
 
 const run = async () => {
-  // const resp = await fetch(URL, {method: "POST", body: BODY}).then((i) => i.json());
   const resp = await fetch(URL, {
     method: 'POST',
     body: JSON.stringify(BODY),
     headers: HEADERS,
   }).then((i) => i.json());
+  const idSymbolMap = new Map();
   const data = resp.data.protocolData.reserves;
-  return data.map(({ symbol, liquidityRate, underlyingAsset }) => ({
-    symbol: symbol,
-    apy: parseFloat(liquidityRate) / 1e26,
-    address: underlyingAsset,
-    tvl: 0,
-  }));
+  data.forEach(({ id, symbol }) => {
+    idSymbolMap.set(id, symbol);
+  });
+  const marketResp = await fetch(MARKET_URL).then((i) => i.json());
+  const apys = [];
+  marketResp.reserves.forEach(
+    ({
+      id,
+      underlyingAsset,
+      totalLiquidityUSD,
+      liquidityRate,
+      aIncentivesAPY,
+    }) => {
+      if (idSymbolMap.has(id)) {
+        apys.push({
+          symbol: idSymbolMap.get(id),
+          address: underlyingAsset,
+          tvl: parseFloat(totalLiquidityUSD),
+          apy: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
+        });
+      }
+    },
+  );
+  return apys;
 };
 
 module.exports = {
