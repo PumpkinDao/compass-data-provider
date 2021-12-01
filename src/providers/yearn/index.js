@@ -6,9 +6,9 @@ const run = async () => {
   return resp.map(({ token, tvl, apy }) => ({
     symbol: token.symbol,
     address: token.address,
-    icon: token.icon,
     tvl: tvl.tvl,
     apy: apy['net_apy'],
+    lp: false,
   }));
 };
 

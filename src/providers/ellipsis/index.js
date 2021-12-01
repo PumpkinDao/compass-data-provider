@@ -22,6 +22,7 @@ const run = async () => {
       symbol: symbol,
       apy: parseFloat(epsApy) / 100 + apy / 100,
       tvl: tvl,
+      lp: true,
     };
   };
 
