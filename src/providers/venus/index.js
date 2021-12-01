@@ -18,6 +18,7 @@ const run = async () => {
       address: underlyingSymbol === 'BNB' ? WBNB : underlyingAddress,
       tvl: totalSupplyUsd,
       apy: parseFloat(supplyApy) + parseFloat(supplyVenusApy),
+      lp: false,
     }),
   );
 };

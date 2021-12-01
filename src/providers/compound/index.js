@@ -31,6 +31,7 @@ const run = async () => {
         apy:
           parseFloat(supply_rate.value) +
           parseFloat(comp_supply_apy.value) / 10000,
+        lp: false,
       };
     },
   );

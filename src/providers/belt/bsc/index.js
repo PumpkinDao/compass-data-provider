@@ -13,17 +13,22 @@ const run = async () => {
     address: wantToken,
     tvl: parseFloat(tvl),
     apy: parseFloat(totalAPR) / 100,
+    lp: false,
   }));
-  bscData.vaultPools.forEach(({ name, wantToken, wantLocked, totalAPR }) => {
-    if (wantToken === FourBelt) {
-      pools.push({
-        symbol: name,
-        address: wantToken,
-        tvl: parseFloat(wantLocked),
-        apy: parseFloat(totalAPR) / 100,
-      });
-    }
-  });
+  bscData.vaultPools.forEach(
+    ({ name, wantToken, wantLocked, totalAPR, descriptions }) => {
+      if (wantToken === FourBelt) {
+        pools.push({
+          symbol: name,
+          address: wantToken,
+          tvl: parseFloat(wantLocked),
+          apy: parseFloat(totalAPR) / 100,
+          lp: true,
+          meta: [descriptions],
+        });
+      }
+    },
+  );
   return pools;
 };
 
