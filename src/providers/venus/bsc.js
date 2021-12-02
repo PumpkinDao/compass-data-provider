@@ -14,7 +14,7 @@ const run = async () => {
       supplyApy,
       supplyVenusApy,
     }) => ({
-      symbol: underlyingSymbol,
+      name: underlyingSymbol,
       address: underlyingSymbol === 'BNB' ? WBNB : underlyingAddress,
       tvl: totalSupplyUsd,
       apy: parseFloat(supplyApy) + parseFloat(supplyVenusApy),
@@ -25,6 +25,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'bsc',
   run,
 };

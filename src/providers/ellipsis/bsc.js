@@ -9,17 +9,17 @@ const run = async () => {
   const tvlResp = await fetch(TVL_URL).then((i) => i.json());
 
   const parseData = ({ lpToken, tokens, epsApy, apy, address }) => {
-    var symbol = lpToken.symbol;
+    let name = lpToken.symbol;
     tokens.forEach((t) => {
-      symbol = symbol + '_' + t.symbol;
+      name = name + '_' + t.symbol;
     });
-    var tvl = tvlResp.data[address];
+    let tvl = tvlResp.data[address];
     if (tvl === undefined) {
       tvl = 0;
     }
     return {
       address: lpToken.address,
-      symbol: symbol,
+      name,
       apy: parseFloat(epsApy) / 100 + apy / 100,
       tvl: tvl,
       lp: true,
@@ -34,6 +34,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'bsc',
   run,
 };

@@ -9,7 +9,7 @@ const run = async () => {
   const bscData = resp.info.BSC;
 
   const pools = bscData.vaults.map(({ name, totalAPR, tvl, wantToken }) => ({
-    symbol: name,
+    name,
     address: wantToken,
     tvl: parseFloat(tvl),
     apy: parseFloat(totalAPR) / 100,
@@ -19,12 +19,12 @@ const run = async () => {
     ({ name, wantToken, wantLocked, totalAPR, descriptions }) => {
       if (wantToken === FourBelt) {
         pools.push({
-          symbol: name,
+          name,
           address: wantToken,
           tvl: parseFloat(wantLocked),
           apy: parseFloat(totalAPR) / 100,
           lp: true,
-          meta: [descriptions],
+          keywords: descriptions,
         });
       }
     },
@@ -34,6 +34,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'bsc',
   run,
 };
