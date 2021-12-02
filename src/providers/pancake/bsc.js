@@ -16,6 +16,7 @@ const multiCallAbi = new ethers.utils.Interface([
 const erc20Abi = new ethers.utils.Interface([
   'function balanceOf(address owner) view returns (uint)',
   'function totalSupply() view returns (uint)',
+  'function symbol() view returns (string memory)',
 ]);
 
 const chefAbi = new ethers.utils.Interface([
@@ -85,41 +86,57 @@ const getPairTVL = async (pairAddr, bnbPrice) => {
   const totalSupply = await pairContract.totalSupply();
   if (baseToken !== null) {
     const tokenContract = new ethers.Contract(baseToken, erc20Abi, provider);
-    return (await tokenContract.balanceOf(pairAddr))
-      .mul(2)
-      .mul(chefHoldShare)
-      .div(totalSupply);
+    return [
+      (await tokenContract.balanceOf(pairAddr))
+        .mul(2)
+        .mul(chefHoldShare)
+        .div(totalSupply),
+      token0,
+      token1,
+    ];
   }
   if (token0 === wbnb || token1 === wbnb) {
     const tokenContract = new ethers.Contract(wbnb, erc20Abi, provider);
-    return (await tokenContract.balanceOf(pairAddr))
-      .mul(2)
-      .mul(bnbPrice)
-      .mul(chefHoldShare)
-      .div(totalSupply)
-      .div(E18);
+    return [
+      (await tokenContract.balanceOf(pairAddr))
+        .mul(2)
+        .mul(bnbPrice)
+        .mul(chefHoldShare)
+        .div(totalSupply)
+        .div(E18),
+      token0,
+      token1,
+    ];
   }
   if (token0 === eth || token1 === eth) {
     const ethPrice = await getPrice([eth, busd]);
     const tokenContract = new ethers.Contract(eth, erc20Abi, provider);
-    return (await tokenContract.balanceOf(pairAddr))
-      .mul(2)
-      .mul(ethPrice)
-      .mul(chefHoldShare)
-      .div(totalSupply)
-      .div(E18);
+    return [
+      (await tokenContract.balanceOf(pairAddr))
+        .mul(2)
+        .mul(ethPrice)
+        .mul(chefHoldShare)
+        .div(totalSupply)
+        .div(E18),
+      token0,
+      token1,
+    ];
   }
   if (token0 === btc || token1 === btc) {
     const btcPrice = await getPrice([btc, busd]);
     const tokenContract = new ethers.Contract(btc, erc20Abi, provider);
-    return (await tokenContract.balanceOf(pairAddr))
-      .mul(2)
-      .mul(btcPrice)
-      .mul(chefHoldShare)
-      .div(totalSupply)
-      .div(E18);
+    return [
+      (await tokenContract.balanceOf(pairAddr))
+        .mul(2)
+        .mul(btcPrice)
+        .mul(chefHoldShare)
+        .div(totalSupply)
+        .div(E18),
+      token0,
+      token1,
+    ];
   }
-  return null;
+  return [null, null, null];
 };
 
 const run = async () => {
@@ -151,7 +168,7 @@ const run = async () => {
       results[i],
     );
     if (allocPoint.toNumber() >= 100) {
-      let tvl = await getPairTVL(addr, bnbPrice);
+      let [tvl, token0, token1] = await getPairTVL(addr, bnbPrice);
       if (tvl !== null) {
         const yearlyProduceCake = cakePerBlock.mul(blocksPerYear).div(E18);
         const apy = yearlyProduceCake
@@ -161,11 +178,19 @@ const run = async () => {
           .mul(10000)
           .div(tvl);
         const floatApy = apy.toNumber() / 10000;
+        const token0Contract = new ethers.Contract(token0, erc20Abi, provider);
+        const token1Contract = new ethers.Contract(token1, erc20Abi, provider);
+        const name =
+          (await token0Contract.symbol()) +
+          '_' +
+          (await token1Contract.symbol());
         apys.push({
-          name: '', // todo
+          name: name,
           address: addr,
+          depositCoins: [token0, token1],
           tvl: tvl.div(E18).toString(),
           apy: floatApy,
+          lp: true,
         });
       }
     }
