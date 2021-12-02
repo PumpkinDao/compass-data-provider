@@ -12,7 +12,13 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
   const apy = await m.run();
   if (apy !== null) {
     apy.forEach((item) => {
-      console.log(item.symbol, item.address, item.tvl, item.apy);
+      console.log(
+        item.name,
+        item.address,
+        item.tvl,
+        item.apy,
+        item.depositCoins,
+      );
     });
   }
 
