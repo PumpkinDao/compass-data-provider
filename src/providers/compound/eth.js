@@ -22,7 +22,7 @@ const run = async () => {
     }) => {
       return {
         address: underlying_symbol === 'ETH' ? WETH : underlying_address,
-        symbol: underlying_symbol,
+        name: underlying_symbol,
         tvl:
           parseFloat(total_supply.value) *
           parseFloat(underlying_price.value) *
@@ -39,6 +39,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'eth',
   run,
 };

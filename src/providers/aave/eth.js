@@ -41,7 +41,7 @@ const run = async () => {
     }) => {
       if (idSymbolMap.has(id)) {
         apys.push({
-          symbol: idSymbolMap.get(id),
+          name: idSymbolMap.get(id),
           address: underlyingAsset,
           tvl: parseFloat(totalLiquidityUSD),
           apy: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
@@ -55,6 +55,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'eth',
   run,
 };

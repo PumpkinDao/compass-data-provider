@@ -68,14 +68,14 @@ const getPrice = async (path, amt = E18) => {
 const getPairTVL = async (pairAddr, bnbPrice) => {
   // return tvl(usd) * E18
   const pairContract = new ethers.Contract(pairAddr, uniV2PairAbi, provider);
-  var token0 = null;
+  let token0 = null;
   try {
     token0 = await pairContract.token0();
   } catch (e) {
     return null;
   }
   const token1 = await pairContract.token1();
-  var baseToken = null;
+  let baseToken = null;
   if (token0 === usdt || token1 === usdt) {
     baseToken = token0 === usdt ? token0 : token1;
   } else if (token0 === busd || token1 === busd) {
@@ -90,7 +90,7 @@ const getPairTVL = async (pairAddr, bnbPrice) => {
       .mul(chefHoldShare)
       .div(totalSupply);
   }
-  if (token0 === wbnb || token1 == wbnb) {
+  if (token0 === wbnb || token1 === wbnb) {
     const tokenContract = new ethers.Contract(wbnb, erc20Abi, provider);
     return (await tokenContract.balanceOf(pairAddr))
       .mul(2)
@@ -99,7 +99,7 @@ const getPairTVL = async (pairAddr, bnbPrice) => {
       .div(totalSupply)
       .div(E18);
   }
-  if (token0 == eth || token1 == eth) {
+  if (token0 === eth || token1 === eth) {
     const ethPrice = await getPrice([eth, busd]);
     const tokenContract = new ethers.Contract(eth, erc20Abi, provider);
     return (await tokenContract.balanceOf(pairAddr))
@@ -109,7 +109,7 @@ const getPairTVL = async (pairAddr, bnbPrice) => {
       .div(totalSupply)
       .div(E18);
   }
-  if (token0 == btc || token1 == btc) {
+  if (token0 === btc || token1 === btc) {
     const btcPrice = await getPrice([btc, busd]);
     const tokenContract = new ethers.Contract(btc, erc20Abi, provider);
     return (await tokenContract.balanceOf(pairAddr))
@@ -132,7 +132,7 @@ const run = async () => {
   const totalPoint = await chefContract.totalAllocPoint();
 
   const calls = [];
-  for (var i = 250; i < poolSize; i++) {
+  for (let i = 250; i < poolSize; i++) {
     // old pool id < 250
     calls.push([chefAddress, chefAbi.encodeFunctionData('poolInfo', [i])]);
   }
@@ -145,13 +145,13 @@ const run = async () => {
   const apys = [];
 
   // TODO use multi call
-  for (i = 0; i < results.length; i++) {
+  for (let i = 0; i < results.length; i++) {
     const [addr, allocPoint] = chefAbi.decodeFunctionResult(
       'poolInfo',
       results[i],
     );
     if (allocPoint.toNumber() >= 100) {
-      var tvl = await getPairTVL(addr, bnbPrice);
+      let tvl = await getPairTVL(addr, bnbPrice);
       if (tvl !== null) {
         const yearlyProduceCake = cakePerBlock.mul(blocksPerYear).div(E18);
         const apy = yearlyProduceCake
@@ -162,7 +162,7 @@ const run = async () => {
           .div(tvl);
         const floatApy = apy.toNumber() / 10000;
         apys.push({
-          symbol: '',
+          name: '', // todo
           address: addr,
           tvl: tvl.div(E18).toString(),
           apy: floatApy,
@@ -175,6 +175,5 @@ const run = async () => {
 
 module.exports = {
   version: 1,
-  chain: 'bsc',
   run,
 };
