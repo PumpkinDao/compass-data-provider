@@ -22,6 +22,7 @@ const run = async () => {
     }) => {
       return {
         address: underlying_symbol === 'ETH' ? WETH : underlying_address,
+        depositCoins: [underlying_symbol === 'ETH' ? WETH : underlying_address],
         name: underlying_symbol,
         tvl:
           parseFloat(total_supply.value) *

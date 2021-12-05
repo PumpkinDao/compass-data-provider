@@ -16,6 +16,7 @@ const run = async () => {
     }) => ({
       name: underlyingSymbol,
       address: underlyingSymbol === 'BNB' ? WBNB : underlyingAddress,
+      depositCoins: [underlyingSymbol === 'BNB' ? WBNB : underlyingAddress],
       tvl: totalSupplyUsd,
       apy: parseFloat(supplyApy) + parseFloat(supplyVenusApy),
       lp: false,

@@ -43,6 +43,7 @@ const run = async () => {
         apys.push({
           name: idSymbolMap.get(id),
           address: underlyingAsset,
+          depositCoins: [underlyingAsset],
           tvl: parseFloat(totalLiquidityUSD),
           apy: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
           lp: false,

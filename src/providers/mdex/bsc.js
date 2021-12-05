@@ -6,12 +6,13 @@ const run = async () => {
   const resp = await fetch(URL).then((i) => i.json());
   return resp.result
     .filter((item) => {
-      return item.pool_apy !== 0;
+      return item.pool_apy !== 0 && item.token0 !== undefined;
     })
-    .map(({ address, pool_name, pool_tvl, pool_apy }) => ({
+    .map(({ address, pool_name, pool_tvl, pool_apy, token0, token1 }) => ({
       name: pool_name,
       address: address,
       tvl: pool_tvl,
+      depositCoins: [token0, token1],
       apy: pool_apy,
       lp: true,
     }));

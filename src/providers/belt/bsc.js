@@ -11,16 +11,18 @@ const run = async () => {
   const pools = bscData.vaults.map(({ name, totalAPR, tvl, wantToken }) => ({
     name,
     address: wantToken,
+    depositCoins: [wantToken],
     tvl: parseFloat(tvl),
     apy: parseFloat(totalAPR) / 100,
     lp: false,
   }));
   bscData.vaultPools.forEach(
-    ({ name, wantToken, wantLocked, totalAPR, descriptions }) => {
+    ({ name, wantToken, wantLocked, totalAPR, descriptions, members }) => {
       if (wantToken === FourBelt) {
         pools.push({
           name,
           address: wantToken,
+          depositCoins: members,
           tvl: parseFloat(wantLocked),
           apy: parseFloat(totalAPR) / 100,
           lp: true,

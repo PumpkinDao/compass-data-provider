@@ -6,6 +6,7 @@ const run = async () => {
   return resp.map(({ token, tvl, apy }) => ({
     name: token.symbol,
     address: token.address,
+    depositCoins: [token.address],
     tvl: tvl.tvl,
     apy: apy['net_apy'],
     lp: false,
