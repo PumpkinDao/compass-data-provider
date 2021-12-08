@@ -10,7 +10,13 @@ const IB_ABI = new ethers.utils.Interface([
   'function vaultDebtVal() view returns (uint)',
 ]);
 
-// const chefAddress = "0xA625AB01B08ce023B2a342Dbb12a16f2C8489A8F";
+const chefAbi = new ethers.utils.Interface([
+  'function alpacaPerBlock() view returns (uint)',
+  'function totalAllocPoint() view returns (uint)',
+  'function poolInfo(uint i) view returns (address, uint, uint, uint, uint)',
+]);
+
+const chefAddress = '0xA625AB01B08ce023B2a342Dbb12a16f2C8489A8F';
 
 const E18 = ethers.BigNumber.from('1000000000000000000'); // 1e18
 
@@ -82,8 +88,17 @@ const getPrice = async (path, amt = E18) => {
 
 const run = async () => {
   let pools = [];
+  let chefContract = new ethers.Contract(chefAddress, chefAbi, provider);
+  let alpacaPerBlock = (await chefContract.alpacaPerBlock()).div(E18);
+  let totalPoint = await chefContract.totalAllocPoint();
+
+  let alpacaPrice = await getPrice([
+    '0x8F0528cE5eF7B51152A59745bEfDD91D97091d2F',
+    '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+  ]);
+
   for (let i = 0; i < vaults.length; i++) {
-    let [name, ibToken, token, , presetPrice] = vaults[i];
+    let [name, ibToken, token, poolId, presetPrice] = vaults[i];
     let ibBnbContract = new ethers.Contract(ibToken, IB_ABI, provider);
     let totalToken = await ibBnbContract.totalToken();
     let vaultDebt = await ibBnbContract.vaultDebtVal();
@@ -109,10 +124,21 @@ const run = async () => {
     }
     let tvl = totalToken.mul(price).div(E18).div(E18).toNumber();
 
+    let v = await chefContract.poolInfo(poolId);
+
+    let alpacaApr =
+      alpacaPerBlock
+        .mul(alpacaPrice)
+        .mul(10512000)
+        .mul(v[1])
+        .div(totalPoint)
+        .div(E18)
+        .toNumber() / tvl;
+
     pools.push({
       name,
       tvl,
-      apy,
+      apy: apy + alpacaApr,
       address: token,
       depositCoins: [token],
       lp: false,
