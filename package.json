@@ -2,7 +2,7 @@
   "name": "@pumpkindao/compass-data-provider",
   "author": "Pumpkin Team",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Compass Data Provider",
   "main": "src/index.js",
   "scripts": {
