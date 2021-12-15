@@ -6,20 +6,13 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
+const columns = ['name', 'address', 'tvl', 'apr', 'depositCoins'];
 
 (async () => {
   const m = require(passedFile);
   const apy = await m.run();
-  if (apy !== null) {
-    apy.forEach((item) => {
-      console.log(
-        item.name,
-        item.address,
-        item.tvl,
-        item.apy,
-        item.depositCoins,
-      );
-    });
+  if (apy) {
+    console.table(apy, columns);
   }
 
   process.exit(0);
