@@ -49,7 +49,7 @@ const _setupDefaultProviders = () => {
     false,
   );
   setUpProvider(
-    'matic',
+    'polygon',
     137,
     ['https://polygon-rpc.com/', 'https://rpc-mainnet.maticvigil.com/'],
     false,
