@@ -18,13 +18,13 @@ const run = async () => {
       tvl = 0;
     }
     let depositCoins = tokens.map((erc20address) => {
-      return erc20address;
+      return erc20address.erc20address || erc20address.address;
     });
     return {
       address: lpToken.address,
       name,
       depositCoins,
-      apy: parseFloat(epsApy) / 100 + apy / 100,
+      apr: parseFloat(epsApy) / 100 + apy / 100,
       tvl: tvl,
       lp: true,
     };

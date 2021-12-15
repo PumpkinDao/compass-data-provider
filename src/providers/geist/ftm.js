@@ -45,7 +45,7 @@ const run = async () => {
       let name = await tokenContract.symbol();
       pools.push({
         tvl: item.poolValue,
-        apy: item.apy + lendingApr,
+        apr: item.apy + lendingApr,
         address: item.underlyingAsset,
         depositCoins: [item.underlyingAsset],
         lp: false,

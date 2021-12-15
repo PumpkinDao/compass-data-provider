@@ -23,7 +23,7 @@ const run = async () => {
           address: value.liquidityPair.id,
           depositCoins,
           tvl: value.tvl,
-          apy: value.roiPerYear,
+          apr: value.roiPerYear,
           lp: true,
         });
       }

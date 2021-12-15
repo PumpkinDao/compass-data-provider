@@ -54,7 +54,6 @@ const composeBody = (lps) => {
 
 const queryGraph = async (lps) => {
   let b = composeBody(lps);
-  console.log(b);
   let body = { query: b };
   const resp = await fetch(graphUrl, {
     method: 'POST',
@@ -114,7 +113,6 @@ const run = async () => {
     let allocPoint = pointMap[id];
     const yearlyProduceCake = cakePerBlock.mul(blocksPerYear).div(E18);
     let tvl = parseFloat(reserveUSD);
-    console.log(tvl);
 
     const apy = yearlyProduceCake
       .mul(allocPoint)
@@ -130,7 +128,7 @@ const run = async () => {
       address: id,
       depositCoins: [token0.id, token1.id],
       tvl: tvl,
-      apy: floatApy,
+      apr: floatApy,
       lp: true,
     });
   });

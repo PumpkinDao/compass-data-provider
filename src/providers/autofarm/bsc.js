@@ -8,7 +8,7 @@ const run = async () => {
   const resp = await fetch(URL).then((i) => i.json());
   const bscData = Object.values(resp.pools);
 
-  const pools = bscData.map((item) => {
+  return bscData.map((item) => {
     if (item.wantIsLP) {
       let coins = [];
       if (item.token0Address !== deadAddr) {
@@ -22,7 +22,7 @@ const run = async () => {
         address: item.wantAddress,
         depositCoins: coins,
         tvl: item.poolWantTVL,
-        apy: item.APR,
+        apr: item.APR,
         lp: item.wantIsLP,
       };
     } else {
@@ -31,12 +31,11 @@ const run = async () => {
         address: item.wantAddress,
         depositCoins: [item.wantAddress],
         tvl: item.poolWantTVL,
-        apy: item.APR,
+        apr: item.APR,
         lp: item.wantIsLP,
       };
     }
   });
-  return pools;
 };
 
 module.exports = {

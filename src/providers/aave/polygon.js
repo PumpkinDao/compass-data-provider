@@ -45,7 +45,7 @@ const run = async () => {
           address: underlyingAsset,
           depositCoins: [underlyingAsset],
           tvl: parseFloat(totalLiquidityUSD),
-          apy: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
+          apr: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
           lp: false,
         });
       }
