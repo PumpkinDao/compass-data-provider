@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const { ethers } = require('ethers');
-const evm = require('../../../sdk/evm');
+const evm = require('../../sdk/evm');
 
 const provider = evm.getProvider('ftm');
 
