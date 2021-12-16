@@ -12,7 +12,7 @@ const run = async () => {
     address: wantToken,
     depositCoins: [wantToken],
     tvl: parseFloat(tvl),
-    apr: parseFloat(totalAPR) / 100,
+    apy: parseFloat(totalAPR) / 100,
     lp: false,
   }));
   bscData.vaultPools.forEach(
@@ -23,7 +23,7 @@ const run = async () => {
           address: wantToken,
           depositCoins: members,
           tvl: parseFloat(wantLocked),
-          apr: parseFloat(totalAPR) / 100,
+          apy: parseFloat(totalAPR) / 100,
           lp: true,
           keywords: descriptions,
         });

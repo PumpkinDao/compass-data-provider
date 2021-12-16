@@ -13,7 +13,7 @@ const run = async () => {
       address: address,
       tvl: pool_tvl,
       depositCoins: [token0, token1],
-      apr: pool_apy,
+      apy: pool_apy,
       lp: true,
     }));
 };

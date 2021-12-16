@@ -24,7 +24,7 @@ const run = async () => {
       address: lpToken.address,
       name,
       depositCoins,
-      apr: parseFloat(epsApy) / 100 + apy / 100,
+      apy: parseFloat(epsApy) / 100 + apy / 100,
       tvl: tvl,
       lp: true,
     };

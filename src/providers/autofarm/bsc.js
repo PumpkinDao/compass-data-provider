@@ -22,7 +22,7 @@ const run = async () => {
         address: item.wantAddress,
         depositCoins: coins,
         tvl: item.poolWantTVL,
-        apr: item.APR,
+        apy: item.APR,
         lp: item.wantIsLP,
       };
     } else {
@@ -31,7 +31,7 @@ const run = async () => {
         address: item.wantAddress,
         depositCoins: [item.wantAddress],
         tvl: item.poolWantTVL,
-        apr: item.APR,
+        apy: item.APR,
         lp: item.wantIsLP,
       };
     }

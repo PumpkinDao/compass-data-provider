@@ -33,7 +33,7 @@ const run = async () => {
       address: addr,
       depositCoins: [addr],
       tvl: tvl.tvl,
-      apr: apy['net_apy'],
+      apy: apy['net_apy'],
       lp: false,
     });
   });

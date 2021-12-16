@@ -6,7 +6,7 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
-const columns = ['name', 'address', 'tvl', 'apr', 'depositCoins'];
+const columns = ['name', 'address', 'tvl', 'apy', 'depositCoins'];
 
 (async () => {
   const m = require(passedFile);

@@ -29,7 +29,7 @@ const run = async () => {
           parseFloat(underlying_price.value) *
           parseFloat(exchange_rate.value) *
           ethPrice,
-        apr:
+        apy:
           parseFloat(supply_rate.value) +
           parseFloat(comp_supply_apy.value) / 10000,
         lp: false,
