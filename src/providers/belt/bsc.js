@@ -15,13 +15,19 @@ const run = async () => {
     apy: parseFloat(totalAPR) / 100,
     lp: false,
   }));
+  let FourBeltDepositCoins = [];
+  bscData.swapPools.forEach(({ blp, members }) => {
+    if (blp === FourBelt) {
+      FourBeltDepositCoins = members;
+    }
+  });
   bscData.vaultPools.forEach(
-    ({ name, wantToken, wantLocked, totalAPR, descriptions, members }) => {
+    ({ name, wantToken, wantLocked, totalAPR, descriptions }) => {
       if (wantToken === FourBelt) {
         pools.push({
           name,
           address: wantToken,
-          depositCoins: members,
+          depositCoins: FourBeltDepositCoins,
           tvl: parseFloat(wantLocked),
           apy: parseFloat(totalAPR) / 100,
           lp: true,
