@@ -137,7 +137,7 @@ const run = async () => {
 
     pools.push({
       name,
-      tvl,
+      tvl: parseInt(tvl),
       apy: apy + alpacaApr,
       address: token,
       depositCoins: [token],

@@ -24,11 +24,12 @@ const run = async () => {
         address: underlying_symbol === 'ETH' ? WETH : underlying_address,
         depositCoins: [underlying_symbol === 'ETH' ? WETH : underlying_address],
         name: underlying_symbol,
-        tvl:
+        tvl: parseInt(
           parseFloat(total_supply.value) *
-          parseFloat(underlying_price.value) *
-          parseFloat(exchange_rate.value) *
-          ethPrice,
+            parseFloat(underlying_price.value) *
+            parseFloat(exchange_rate.value) *
+            ethPrice,
+        ),
         apy:
           parseFloat(supply_rate.value) +
           parseFloat(comp_supply_apy.value) / 10000,

@@ -28,7 +28,7 @@ const run = async () => {
           name,
           address: wantToken,
           depositCoins: FourBeltDepositCoins,
-          tvl: parseFloat(wantLocked),
+          tvl: parseInt(wantLocked),
           apy: parseFloat(totalAPR) / 100,
           lp: true,
           keywords: descriptions,

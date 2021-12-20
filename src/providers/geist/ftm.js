@@ -44,7 +44,7 @@ const run = async () => {
       let lendingApr = reserveData[3].div(E18).toNumber() / 1e9;
       let name = await tokenContract.symbol();
       pools.push({
-        tvl: item.poolValue,
+        tvl: parseInt(item.poolValue),
         apy: item.apy + lendingApr,
         address: item.underlyingAsset,
         depositCoins: [item.underlyingAsset],

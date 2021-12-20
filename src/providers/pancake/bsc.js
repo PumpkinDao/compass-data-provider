@@ -127,7 +127,7 @@ const run = async () => {
       name: name,
       address: id,
       depositCoins: [token0.id, token1.id],
-      tvl: tvl,
+      tvl: parseInt(tvl),
       apy: floatApy,
       lp: true,
     });

@@ -17,7 +17,7 @@ const run = async () => {
       name: underlyingSymbol,
       address: underlyingSymbol === 'BNB' ? WBNB : underlyingAddress,
       depositCoins: [underlyingSymbol === 'BNB' ? WBNB : underlyingAddress],
-      tvl: totalSupplyUsd,
+      tvl: parseInt(totalSupplyUsd),
       apy: (parseFloat(supplyApy) + parseFloat(supplyVenusApy)) / 100,
       lp: false,
     }),

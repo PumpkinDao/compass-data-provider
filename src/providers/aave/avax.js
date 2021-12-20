@@ -44,7 +44,7 @@ const run = async () => {
           name: idSymbolMap.get(id),
           address: underlyingAsset,
           depositCoins: [underlyingAsset],
-          tvl: parseFloat(totalLiquidityUSD),
+          tvl: parseInt(totalLiquidityUSD),
           apy: parseFloat(aIncentivesAPY) + parseFloat(liquidityRate),
           lp: false,
         });

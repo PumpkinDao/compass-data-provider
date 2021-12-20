@@ -11,7 +11,7 @@ const run = async () => {
     .map(({ address, pool_name, pool_tvl, pool_apy, token0, token1 }) => ({
       name: pool_name,
       address: address,
-      tvl: pool_tvl,
+      tvl: parseInt(pool_tvl),
       depositCoins: [token0, token1],
       apy: pool_apy,
       lp: true,

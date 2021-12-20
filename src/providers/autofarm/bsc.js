@@ -30,7 +30,7 @@ const run = async () => {
         name: item.wantName,
         address: item.wantAddress,
         depositCoins: [item.wantAddress],
-        tvl: item.poolWantTVL,
+        tvl: parseInt(item.poolWantTVL),
         apy: item.APR,
         lp: item.wantIsLP,
       };

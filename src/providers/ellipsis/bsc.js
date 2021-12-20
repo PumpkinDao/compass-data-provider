@@ -25,7 +25,7 @@ const run = async () => {
       name,
       depositCoins,
       apy: parseFloat(epsApy) / 100 + apy / 100,
-      tvl: tvl,
+      tvl: parseInt(tvl),
       lp: true,
     };
   };
