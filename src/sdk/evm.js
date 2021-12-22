@@ -1,6 +1,8 @@
 const { ethers } = require('ethers');
 const assert = require('assert');
+const fetch = require('node-fetch');
 
+globalThis.fetch = fetch;
 const _PROVIDERS = {};
 
 const setUpProvider = (name, chainId, urls, append = true) => {
