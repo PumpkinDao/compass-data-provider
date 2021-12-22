@@ -1,6 +1,6 @@
 # Compass Data Providers
 
-![](https://github.com/PumpkinDao/compass-data-provider/actions/workflows/test.yml/badge.svg)
+![](https://github.com/compassdao/compass-data-provider/actions/workflows/test.yml/badge.svg)
 
 ## I want to apply new commit
 

@@ -1,6 +1,6 @@
 {
-  "name": "@pumpkindao/compass-data-provider",
-  "author": "Pumpkin Team",
+  "name": "@compassdao/compass-data-provider",
+  "author": "CompassDAO",
   "license": "MIT",
   "version": "0.0.9",
   "description": "Compass Data Provider",

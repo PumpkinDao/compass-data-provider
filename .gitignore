@@ -1,6 +1,7 @@
 # package directories
 node_modules
 jspm_packages
+package-lock.json
 
 .idea
 .DS_Store
@@ -9,4 +10,4 @@ dist
 package
 yarn-error.log
 .eslintcache
-pumpkindao-compass-data-provider-*.tgz
+compassdao-compass-data-provider-*.tgz
