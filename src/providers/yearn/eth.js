@@ -32,7 +32,7 @@ const run = async () => {
       name: token.symbol,
       address: addr,
       depositCoins: [addr],
-      tvl: tvl.tvl,
+      tvl: parseInt(tvl.tvl),
       apy: apy['net_apy'],
       lp: false,
     });

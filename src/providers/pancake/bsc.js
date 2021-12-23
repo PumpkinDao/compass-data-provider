@@ -113,6 +113,9 @@ const run = async () => {
     let allocPoint = pointMap[id];
     const yearlyProduceCake = cakePerBlock.mul(blocksPerYear).div(E18);
     let tvl = parseFloat(reserveUSD);
+    if (tvl <= 100) {
+      return;
+    }
 
     const apy = yearlyProduceCake
       .mul(allocPoint)
