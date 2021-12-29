@@ -2,7 +2,7 @@
   "name": "@compassdao/compass-data-provider",
   "author": "CompassDAO",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Compass Data Provider",
   "main": "src/index.js",
   "scripts": {
