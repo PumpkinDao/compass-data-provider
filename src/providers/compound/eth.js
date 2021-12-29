@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const BigNumber = require('bignumber.js');
 
 const URL = 'https://api.compound.finance/api/v2/ctoken';
 
@@ -25,10 +26,15 @@ const run = async () => {
         depositCoins: [underlying_symbol === 'ETH' ? WETH : underlying_address],
         name: underlying_symbol,
         tvl: parseInt(
-          parseFloat(total_supply.value) *
-            parseFloat(underlying_price.value) *
-            parseFloat(exchange_rate.value) *
-            ethPrice,
+          new BigNumber(total_supply.value)
+            .multipliedBy(
+              new BigNumber(
+                parseFloat(underlying_price.value) *
+                  parseFloat(exchange_rate.value) *
+                  ethPrice,
+              ),
+            )
+            .toNumber(),
         ),
         apy:
           parseFloat(supply_rate.value) +
