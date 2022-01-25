@@ -119,12 +119,19 @@ const pools = [
     poolToken: '0x10b620b2dbAC4Faa7D7FFD71Da486f5D44cd86f9',
     poolTokenDecimals: 18,
   },
-  // {
-  //   name: 'XTAROT',
-  //   poolId: 10,
-  //   poolToken: '0x74D1D2A851e339B8cB953716445Be7E8aBdf92F4',
-  //   poolTokenDecimals: 18,
-  // },
+  {
+    name: 'XTAROT',
+    poolId: 10,
+    poolToken: '0x74D1D2A851e339B8cB953716445Be7E8aBdf92F4',
+    poolTokenDecimals: 18,
+    tvlCalculateHelper: async (poolToken, value) => {
+      const price = await getPrice(
+        '0xc5e2b037d30a390e62180970b3aa4e91868764cd',
+      );
+      const shareValue = ethers.BigNumber.from('1050000000000000000'); // hard to calculate
+      return value.mul(price).mul(shareValue).div(E18);
+    },
+  },
   {
     name: 'XCREDIT',
     poolId: 11,
