@@ -44,42 +44,6 @@ const pools = [
     },
   },
   {
-    name: 'wFTM',
-    poolId: 1,
-    poolToken: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-    poolTokenDecimals: 18,
-  },
-  {
-    name: 'wETH',
-    poolId: 2,
-    poolToken: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
-    poolTokenDecimals: 18,
-  },
-  {
-    name: 'wBTC',
-    poolId: 3,
-    poolToken: '0x321162Cd933E2Be498Cd2267a90534A804051b11',
-    poolTokenDecimals: 8,
-  },
-  {
-    name: 'wUSDC',
-    poolId: 3,
-    poolToken: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
-    poolTokenDecimals: 6,
-  },
-  {
-    name: 'wDAI',
-    poolId: 5,
-    poolToken: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
-    poolTokenDecimals: 18,
-  },
-  {
-    name: 'MIN',
-    poolId: 6,
-    poolToken: '0x82f0B8B456c1A451378467398982d4834b6829c1',
-    poolTokenDecimals: 18,
-  },
-  {
     name: 'xBOO',
     poolId: 7,
     poolToken: '0xa48d959AE2E88f1dAA7D5F611E01908106dE7598',
