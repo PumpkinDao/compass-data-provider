@@ -119,12 +119,12 @@ const pools = [
     poolToken: '0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7',
     poolTokenDecimals: 18,
   },
-  {
-    name: 'fBEETS',
-    poolId: 13,
-    poolToken: '0xfcef8a994209d6916EB2C86cDD2AFD60Aa6F54b1',
-    poolTokenDecimals: 18,
-  },
+  // {
+  //   name: 'fBEETS',
+  //   poolId: 13,
+  //   poolToken: '0xfcef8a994209d6916EB2C86cDD2AFD60Aa6F54b1',
+  //   poolTokenDecimals: 18,
+  // },
 ];
 
 const CHEF_ADDRESS = '0xa7821c3e9fc1bf961e280510c471031120716c3d';
