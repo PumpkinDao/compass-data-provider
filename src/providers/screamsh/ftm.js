@@ -15,7 +15,7 @@ const run = async () => {
       tvl: market.cash * market.underlyingPriceUSD,
       apy: parseFloat(market.supplyRate),
       address: market.id,
-      depositCoins: [market.underlyingSymbol],
+      depositCoins: [market.underlyingAddress],
       lp: false,
     }))
     .filter((i) => i.tvl > 0 && i.apy > 0);
